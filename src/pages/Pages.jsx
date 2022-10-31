@@ -3,7 +3,6 @@ import Home from "./Home";
 import Cuisine from "./Cuisine";
 import Searched from "./Searched";
 import Recipe from "./Recipe";
-import Favourites from "./Favourites";
 import { AnimatePresence } from "framer-motion";
 import { Route, Routes, useLocation } from "react-router-dom";
 
@@ -16,7 +15,6 @@ function Pages() {
         <Route path="/cuisine/:type" element={<Cuisine />} />
         <Route path="/searched/:search" element={<Searched />} />
         <Route path="/recipe/:name" element={<Recipe />} />
-        <Route path="/favourites" element={<Favourites />} />
       </Routes>
     </AnimatePresence>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import Typography from "@mui/material/Typography";
 import { Link, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 
@@ -18,7 +19,6 @@ function Cuisine() {
 
   useEffect(() => {
     getCuisine(params.type);
-    console.log(params.type);
   }, [params.type]);
 
   return (
@@ -33,7 +33,9 @@ function Cuisine() {
           <Card key={item.id}>
             <Link to={"/recipe/" + item.id}>
               <img src={item.image} alt={item.image} />
-              <h4>{item.title}</h4>
+              <Typography color="primary" variant="h4" gutterBottom>
+                {item.title}
+              </Typography>
             </Link>
           </Card>
         );

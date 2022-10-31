@@ -4,14 +4,27 @@ import styled from "styled-components";
 import React from "react";
 import { BsHeart, BsHeartFill } from "react-icons/bs";
 import Comments from "../comments/Comments";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 
 const Recipe = () => {
   let params = useParams();
   const [details, setDetails] = useState({});
   const [activeTab, setActiveTab] = useState("instructions");
-  const [favorite, setFavorite] = useState(false);
 
-  const toggleFavorite = () => setFavorite((prev) => !prev);
+  const [fav, setFav] = useState(false);
+
+  useEffect(() => {
+    const data = localStorage.getItem(details.id);
+    if (data) setFav(true);
+  }, [details.id]);
+
+  const toggleFavorite = () => {
+    setFav(!fav);
+    fav
+      ? localStorage.removeItem(details.id)
+      : localStorage.setItem(details.id, details.id);
+  };
 
   const fetchDetails = async () => {
     const data = await fetch(
@@ -26,19 +39,19 @@ const Recipe = () => {
   }, [params.name]);
 
   return (
-    <div>
-      <DetailWrapper>
-        <div>
-          <h2>{details.title}</h2>
-          <img src={details.image} alt={details.title} />
-          <div onClick={toggleFavorite} className="Favourite">
-            {favorite ? <BsHeartFill /> : <BsHeart />}
-          </div>
-          <Comments
-            commentsUrl="http://localhost:3004/comments"
-            currentUserId="1"
-          />
+    <DetailWrapper>
+      <div>
+        <Typography color="primary" variant="h3" gutterBottom>
+          {details.title}
+        </Typography>
+
+        <img src={details.image} alt={details.title} />
+        <div onClick={toggleFavorite}>
+          {fav ? <BsHeartFill /> : <BsHeart />}
         </div>
+      </div>
+
+      <div>
         <Info>
           <Button
             className={activeTab === "instructions" ? "active" : ""}
@@ -52,13 +65,20 @@ const Recipe = () => {
           >
             Ingredients
           </Button>
-
           {activeTab === "instructions" && (
             <div>
-              <h3 dangerouslySetInnerHTML={{ __html: details.summary }}></h3>
-              <h3
+              <Typography
+                color="primary"
+                variant="body1"
+                paragraph
+                dangerouslySetInnerHTML={{ __html: details.summary }}
+              ></Typography>
+              <Typography
+                color="primary"
+                variant="body1"
+                paragraph
                 dangerouslySetInnerHTML={{ __html: details.instructions }}
-              ></h3>
+              ></Typography>
             </div>
           )}
 
@@ -70,19 +90,37 @@ const Recipe = () => {
             </ul>
           )}
         </Info>
-      </DetailWrapper>
-    </div>
+      </div>
+      <div>
+        <Comments
+          commentsUrl="http://localhost:3004/comments"
+          currentUserId="1"
+        />
+      </div>
+    </DetailWrapper>
   );
 };
 
 const DetailWrapper = styled.div`
-  margin-top: 10rem;
+  margin-top: 5rem;
   margin-bottom: 5rem;
-  display: flex;
-  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 2rem;
   .active {
-    background: linear-gradient(35deg, #494949, #313131);
+    background-color: #1976d2;
     color: white;
+  }
+  .active:hover{
+    background-color: #1976d2;
+  }
+  button {
+    margin-bottom: 1rem;
+  }
+  div{
+    @media screen and (max-width: 1024px) {
+      grid-column: 1 / 3;
+  }
   }
 svg {
   margin: 1rem 0;
@@ -94,30 +132,18 @@ svg {
     color: #ff0000;
     transform: scale(1.2);
 }
-  h2 {
-    margin-bottom: 2rem;
-  }
-  li {
-    font-size: 1.2rem;
-    line-height: 2.5rem;
-  }
-  ul {
-    margin-top: 2rem;
-  }
 `;
 
-const Button = styled.button`
-  padding: 1rem 2rem;
-  color: #313131;
-  background: white;
-  border: 2px solid black;
-  margin-right: 2rem;
-  margin-bottom: 2rem;
-  font-weight: 600;
-  cursor: pointer;
-`;
 const Info = styled.div`
-  margin-left: 10rem;
+  margin-top: 1rem;
+  ul {
+    list-style: "- ";
+    color: #1976d2;
+  }
+
+  li {
+    margin-bottom: 1rem;
+  }
 `;
 
 export default Recipe;

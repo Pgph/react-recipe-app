@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
@@ -27,7 +28,9 @@ function Searched() {
           <Card key={item.id}>
             <Link to={"/recipe/" + item.id}>
               <img src={item.image} alt={item.image} />
-              <h4>{item.title}</h4>
+              <Typography color="primary" variant="h4" gutterBottom>
+                {item.title}
+              </Typography>
             </Link>
           </Card>
         );

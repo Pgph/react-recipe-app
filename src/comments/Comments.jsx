@@ -7,6 +7,7 @@ import {
   updateComment as updateCommentApi,
   deleteComment as deleteCommentApi,
 } from "../components/api";
+import Typography from "@mui/material/Typography";
 
 const Comments = ({ commentsUrl, currentUserId }) => {
   const [backendComments, setBackendComments] = useState([]);
@@ -59,8 +60,22 @@ const Comments = ({ commentsUrl, currentUserId }) => {
 
   return (
     <div className="comments">
-      <h3 className="comments-title">Comments</h3>
-      <div className="comment-form-title">Write comment</div>
+      <Typography
+        color="primary"
+        variant="h3"
+        gutterBottom
+        className="comments-title"
+      >
+        Comments
+      </Typography>
+      <Typography
+        color="primary"
+        variant="body1"
+        gutterBottom
+        className="comment-form-title"
+      >
+        Write comment
+      </Typography>
       <CommentForm submitLabel="Write" handleSubmit={addComment} />
       <div className="comments-container">
         {rootComments.map((rootComment) => (

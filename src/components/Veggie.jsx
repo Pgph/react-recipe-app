@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
 import { Link } from "react-router-dom";
+import Typography from "@mui/material/Typography";
 
 function Veggie() {
   const [veggie, setVeggie] = useState([]);
@@ -30,14 +31,25 @@ function Veggie() {
   return (
     <div>
       <Wrapper>
-        <h2>Our Vegetarian Picks</h2>
+        <Typography color="primary" variant="h3" gutterBottom>
+          Our Vegetarian Picks
+        </Typography>
         <Splide
           options={{
             perPage: 3,
+            breakpoints: {
+              1024: {
+                perPage: 2,
+              },
+              768: {
+                perPage: 1,
+              },
+            },
             arrows: false,
             pagination: false,
             drag: "free",
             gap: "5rem",
+            rewind: true,
           }}
         >
           {veggie.map((recipe) => {
@@ -45,7 +57,9 @@ function Veggie() {
               <SplideSlide key={recipe.id}>
                 <Link to={"/recipe/" + recipe.id}>
                   <Card>
-                    <p>{recipe.title}</p>
+                    <Typography color="primary" variant="body1" paragraph>
+                      {recipe.title}
+                    </Typography>
                     <img src={recipe.image} alt={recipe.title} />
                     <Gradient />
                   </Card>

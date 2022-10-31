@@ -13,7 +13,6 @@ function App() {
         <Nav>
           <GiKnifeFork />
           <Logo to={"/"}>Home</Logo>
-          <Favourites to={"/favourites"}>Favourites</Favourites>
         </Nav>
         <Search />
         <Category />
@@ -22,16 +21,10 @@ function App() {
     </div>
   );
 }
-const Favourites = styled(Link)`
-  text-decoration: none;
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: rgb(59, 130, 246);
-`;
 
 const Logo = styled(Link)`
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: 400;
   font-family: "Lobster Two", cursive;
   margin-right: 2rem;
@@ -39,7 +32,7 @@ const Logo = styled(Link)`
 const Nav = styled.div`
   padding: 4rem 0rem;
   display: flex;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
   svg {
     font-size: 2rem;

@@ -2,25 +2,30 @@ import { FaPizzaSlice, FaHamburger } from "react-icons/fa";
 import { GiNoodles, GiChopsticks } from "react-icons/gi";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 function Category() {
   return (
     <List>
       <SLink to="/cuisine/Italian">
-        <FaPizzaSlice />
-        <h4>Italian</h4>
+        <Button size="large" variant="contained" startIcon={<FaPizzaSlice />}>
+          Italian
+        </Button>
       </SLink>
       <SLink to="/cuisine/American">
-        <FaHamburger />
-        <h4>American</h4>
+        <Button size="large" variant="contained" startIcon={<FaHamburger />}>
+          American
+        </Button>
       </SLink>
       <SLink to="/cuisine/Thai">
-        <GiNoodles />
-        <h4>Thai</h4>
+        <Button size="large" variant="contained" startIcon={<GiNoodles />}>
+          Thai
+        </Button>
       </SLink>
       <SLink to="/cuisine/Japanese">
-        <GiChopsticks />
-        <h4>Japanese</h4>
+        <Button size="large" variant="contained" startIcon={<GiChopsticks />}>
+          Japanese
+        </Button>
       </SLink>
     </List>
   );
@@ -30,6 +35,12 @@ const List = styled.div`
   display: flex;
   justify-content: center;
   margin: 2rem 0rem;
+  @media only screen and (max-width: 550px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+  }
 `;
 
 const SLink = styled(NavLink)`
@@ -37,10 +48,8 @@ const SLink = styled(NavLink)`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
   margin-right: 2rem;
   text-decoration: none;
-  background: linear-gradient(35deg, rgb(100, 100, 100), rgb(200, 200, 200));
   width: 6rem;
   height: 6rem;
   cursor: pointer;
@@ -53,14 +62,8 @@ const SLink = styled(NavLink)`
     color: white;
     font-size: 1.5rem;
   }
-  &.active {
-    background: linear-gradient(to right, #f27121, #e94057);
-    svg {
-      color: white;
-    }
-    h4 {
-      color: white;
-    }
+  @media only screen and (max-width: 550px) {
+    height: 3rem;
   }
 `;
 

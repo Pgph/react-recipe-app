@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Splide, SplideSlide } from "@splidejs/react-splide";
 import "@splidejs/splide/dist/css/splide.min.css";
+import Typography from "@mui/material/Typography";
 import { Link } from "react-router-dom";
 
 function Popular() {
@@ -31,10 +32,20 @@ function Popular() {
   return (
     <div>
       <Wrapper>
-        <h2>Popular Picks</h2>
+        <Typography color="primary" variant="h3" gutterBottom>
+          Popular Picks
+        </Typography>
         <Splide
           options={{
             perPage: 4,
+            breakpoints: {
+              1024: {
+                perPage: 2,
+              },
+              768: {
+                perPage: 1,
+              },
+            },
             arrows: false,
             pagination: false,
             drag: "free",
@@ -46,7 +57,9 @@ function Popular() {
               <SplideSlide key={recipe.id}>
                 <Link to={"/recipe/" + recipe.id}>
                   <Card>
-                    <p>{recipe.title}</p>
+                    <Typography color="primary" variant="body1" paragraph>
+                      {recipe.title}
+                    </Typography>
                     <img src={recipe.image} alt={recipe.title} />
                     <Gradient />
                   </Card>
