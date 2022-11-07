@@ -23,6 +23,7 @@ function Search() {
             id="input-with-sx"
             label="Type your meal"
             variant="standard"
+            onChange={(e) => setInput(e.target.value)}
           />
         </Box>
       </div>
